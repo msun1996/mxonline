@@ -26,7 +26,9 @@ SECRET_KEY = '@^(r#h3fxuy-b&7o*kl@58e_l=9g8ly#h4p8087e_+*=y99$44'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
 
 # Application definition
 
@@ -42,7 +44,8 @@ INSTALLED_APPS = [
     'organization',
     'operation',
     'xadmin',
-    'crispy_forms'
+    'crispy_forms',
+    'captcha',
 ]
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -129,3 +132,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static')
+),
+
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'msun1996@163.com'
+EMAIL_HOST_PASSWORD = 'h19960304'
+EMAIL_USER_TLS = False
+EMAIL_FROM = 'msun1996@163.com'
