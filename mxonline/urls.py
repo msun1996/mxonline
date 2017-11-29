@@ -17,8 +17,11 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.views.generic import TemplateView
 import xadmin
+from django.views.static import serve
 
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetViw, ModifyPwdView
+from organization.views import OrgView
+from mxonline.settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -29,5 +32,10 @@ urlpatterns = [
     url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
     url(r'^forget/$', ForgetPwdView.as_view(), name='forget'),
     url(r'^reset/(?P<reset_code>.*)/$', ResetViw.as_view(), name='reset_pwd'),
-    url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd')
+    url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
+
+    url(r'^org/', include('organization.urls', namespace='org')),
+
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT})
+
 ]
