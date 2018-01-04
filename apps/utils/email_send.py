@@ -1,12 +1,9 @@
 # -*- coding:utf-8 -*-
 # author: msun1996
 import random, string
-
 from django.core.mail import send_mail
-
 from users.models import EmailverifyRecord
 from mxonline.settings import EMAIL_FROM
-
 
 def random_str(randomlength=8):
     a = list(string.ascii_letters)
